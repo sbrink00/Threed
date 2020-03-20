@@ -44,7 +44,7 @@ def parse_file(file, edge, transform, screen, color):
       x += 1
     elif lines[x] == "box":
       p = [int(y) for y in lines[x + 1].split(" ")]
-      add_box(edge, p[0], p[1], p[2], p[3], p[4], p[5], .01, .005)
+      add_box(edge, p[0], p[1], p[2], p[3], p[4], p[5])
       x += 1
     elif lines[x] == "ident":
       ident(transform)
