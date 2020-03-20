@@ -1,6 +1,6 @@
 from display import *
 from matrix import *
-from transformations import sin,cos
+from transformations import *
 
 #0, 1, 2, 3, 4, 5, 6
 
@@ -168,19 +168,34 @@ def add_torus(points, cx, cy, cz, r0, r1, thetastep, fistep):
   # height and depth dimensions.
   # ====================
 
-def add_box(points, x, y, z, w, h, d):
-  add_edge(points, x, y, z, x + d, y, z)
-  add_edge(points, x, y, z, x, y, z + w)
-  add_edge(points, x + d, y, z, x + d, y, z + w)
-  add_edge(points, x, y, z + w, x + d, y, z + w)
+def add_box(matrix, x, y, z, w, h, d):
+  points = []
+  add_edge(points, x, y, z, x + w, y, z)
+  add_edge(points, x, y, z, x, y, z - d)
+  add_edge(points, x + w, y, z, x + w, y, z - d)
+  add_edge(points, x, y, z - d, x + w, y, z - d)
   add_edge(points, x, y, z, x, y - h, z)
-  add_edge(points, x, y, z + w, x, y - h, z + w)
-  add_edge(points, x + d, y, z + w, x + d, y - h, z + w)
-  add_edge(points, x + d, y, z, x + d, y - h, z)
-  add_edge(points, x, y - h, z, x + d, y - h, z)
-  add_edge(points, x, y - h, z, x, y - h, z + w)
-  add_edge(points, x + d, y - h, z, x + d, y - h, z + w)
-  add_edge(points, x, y - h, z + w, x + d, y - h, z + w)
+  add_edge(points, x, y, z - d, x, y - h, z - d)
+  add_edge(points, x + w, y, z - d, x + w, y - h, z - d)
+  add_edge(points, x + w, y, z, x + w, y - h, z)
+  add_edge(points, x, y - h, z, x + w, y - h, z)
+  add_edge(points, x, y - h, z, x, y - h, z - d)
+  add_edge(points, x + w, y - h, z, x + w, y - h, z - d)
+  add_edge(points, x, y - h, z - d, x + w, y - h, z - d)
+  # transform = []
+  # ident(transform)
+  # r = []
+  # rotate(r, 'z', 20)
+  # transform_mult(r, transform)
+  # rotate(r, 'x', 20)
+  # transform_mult(r, transform)
+  # rotate(r, 'y', 20)
+  # transform_mult(r, transform)
+  # transform_mult(r, transform)
+  # matrix_mult(transform, points)
+  for i in range(len(points)): matrix.append(points[i])
+
+
 
 def draw_line(x0, y0, x1, y1, screen, color):
   x1,y1,x0,y0 = int(x1),int(y1),int(x0),int(y0)
